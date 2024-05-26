@@ -1,4 +1,4 @@
-How to run data processing for Measurements from Atmotube and gps.
+Dat Processing: How to run data processing for Measurements from Atmotube and gps.
 
 On phone (iPhone12):
 Atmotube Pro: (1) Start Atmotube Pro (40min warmup) - (2) disconnect from Atmotube app (Settings-device-unpair) - (3) find and connect Atmotube in “nRF Connect” app by Nordic - (4) Activate all available downloads from client (nrF Connect-connect ATMOTUBE-client-select all download icons) - (5) export data (ATMOTUBE-log-share).
