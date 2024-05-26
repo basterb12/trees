@@ -1,0 +1,18 @@
+How to run data processing for Measurements from Atmotube and gps.
+
+On phone (iPhone12):
+Atmotube Pro: (1) Start Atmotube Pro (40min warmup) - (2) disconnect from Atmotube app (Settings-device-unpair) - (3) find and connect Atmotube in “nRF Connect” app by Nordic - (4) Activate all available downloads from client (nrF Connect-connect ATMOTUBE-client-select all download icons) - (5) export data (ATMOTUBE-log-share).
+
+GPS: Trip Logger Remote (by Frank Dean) - (1) Settings-Local logging-period:1sec, distance:none, enabled; Accuracy:best, minimumHDOP:5metres, seektime:none, max activity history:1,000(max) - (2) Start - (3) Stop - (4) Tracks-select-share.
+
+
+On computer (macOS Sonoma 14.4.1; Python 3.11.5 using Jupyter Notebook 6.5.4 in Anaconda 2.6.0):
+
+Requirements: (1) requires scripts: ‘import.config.json’ , ‘import_data.py’ , ‘sensor_file_parser.py’ , ‘comb_sens_gpx.py’.
+
+(2) import.config.json : specify input and desired output file paths.
+(3) comb_sens_gpx.py : specify input sensor and gpx files (line 37-39).
+
+In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python comb_sens_gpx.py
+.
+Outputs: ‘DATE_interp_sensor_gpx.csv’ and ‘DATE_sensor_gpx.csv’ created in specified output directory.
