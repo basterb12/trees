@@ -1,0 +1,27 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14920\viewh14080\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 How to run data processing for Measurements from Atmotube and gps.\
+\
+On phone (iPhone12):\
+Atmotube Pro: (1) Start Atmotube Pro (40min warmup) - (2) disconnect from Atmotube app (Settings-device-unpair) - (3) find and connect Atmotube in \'93nRF Connect\'94 app by Nordic - (4) Activate all available downloads from client (nrF Connect-connect ATMOTUBE-client-select all download icons) - (5) export data (ATMOTUBE-log-share).\
+\
+GPS: Trip Logger Remote (by Frank Dean) - (1) Settings-Local logging-period:1sec, distance:none, enabled; Accuracy:best, minimumHDOP:5metres, seektime:none, max activity history:1,000(max) - (2) Start - (3) Stop - (4) Tracks-select-share.\
+\
+\
+On computer (macOS Sonoma 14.4.1; Python 3.11.5 using Jupyter Notebook 6.5.4 in Anaconda 2.6.0):\
+\
+Requirements: (1) requires scripts: \'91import.config.json\'92 , \'91import_data.py\'92 , \'91sensor_file_parser.py\'92 , \'91comb_sens_gpx.py\'92.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+(2) import.config.json : specify input and desired output file paths.\
+(3) comb_sens_gpx.py : specify input sensor and gpx files (line 37-39).\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python comb_sens_gpx.py\
+.\
+Outputs: \'91DATE_interp_sensor_gpx.csv\'92 and \'91DATE_sensor_gpx.csv\'92 created in specified output directory.}
