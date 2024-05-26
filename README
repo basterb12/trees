@@ -8,7 +8,9 @@ GPS: Trip Logger Remote (by Frank Dean) - (1) Settings-Local logging-period:1sec
 
 On computer (macOS Sonoma 14.4.1; Python 3.11.5 using Jupyter Notebook 6.5.4 in Anaconda 2.6.0):
 
-Requirements: (1) requires scripts: ‘import.config.json’ , ‘import_data.py’ , ‘sensor_file_parser.py’ , ‘comb_sens_gpx.py’.
+(1) Rename input file from sensor data adding 'YYYY-MM-DD_' to 'OG-FILENAME.txt'.
+
+Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ , ‘sensor_file_parser.py’ , ‘comb_sens_gpx.py’.
 
 (2) import.config.json : specify input and desired output file paths.
 (3) comb_sens_gpx.py : specify input sensor and gpx files (line 37-39).
