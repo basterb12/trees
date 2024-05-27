@@ -35,14 +35,14 @@ class SensorFileParser:
                     if len(char_line) == 10:  #short data line (humidity,temp,pressure,temp precision)
                         temp = self.byteToInt(char_line[6][0:2])
                         hum = self.byteToInt(char_line[6][2:4])
-                        pressure = self.byteToInt(char_line[7] + char_line[8])
-                        temp_prec = self.byteToInt(char_line[9][0:4])
+                        pressure = self.byteToInt(char_line[7] + char_line[8])/100
+                        temp_prec = self.byteToInt(char_line[9][0:4])/100
                         list_meteo.append([timestamp, hum, temp, pressure, temp_prec])
                     if len(char_line) == 12: #long data line
-                        pm1 = self.byteToInt(char_line[6] + char_line[7][0:2])
-                        pm25 = self.byteToInt(char_line[7][2:4] + char_line[8])
-                        pm10 = self.byteToInt(char_line[9] + char_line[10][0:2])
-                        pm4 = self.byteToInt(char_line[10][2:4] + char_line[11][0:4])
+                        pm1 = self.byteToInt(char_line[6] + char_line[7][0:2])/100
+                        pm25 = self.byteToInt(char_line[7][2:4] + char_line[8])/100
+                        pm10 = self.byteToInt(char_line[9] + char_line[10][0:2])/100
+                        pm4 = self.byteToInt(char_line[10][2:4] + char_line[11][0:4])/100
                         list_env.append([timestamp, pm1, pm25, pm10, pm4])
 
         df_meteo = pd.DataFrame(list_meteo, columns=self.cols_meteo)

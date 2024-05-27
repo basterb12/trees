@@ -35,8 +35,8 @@ from datetime import datetime, timedelta
 
 
 #input files - need to be specified before run
-sensor_file = '2024-05-24_text-8C89FB67B0A2-1.txt'
-gpx_file = '2024-05-24_triplogger-track-20240524T205818+0100.gpx'
+sensor_file = '2024-05-27_LL_text-CEB3F4AF1F9B-1.txt'
+gpx_file = '2024-05-27_LL_triplogger-track-20240527T124039+0100.gpx'
 
 #data path specified in import.config.json
 with open("import.config.json", "r") as jsonfile:
@@ -47,8 +47,8 @@ meteo_data_path = import_config["cache_path"] + sensor_file[:-4] + '_meteo.csv'
 gpx_file_path = import_config["gpx_path"] + gpx_file
 
 #specify output files
-sensor_gpx_path = import_config["sens_gpx_path"] + sensor_file[:10] + '_sensor_gpx.csv'
-interp_sensor_gpx_path = import_config["sens_gpx_path"] + sensor_file[:10] + '_sensor_gpx.csv'
+sensor_gpx_path = import_config["sens_gpx_path"] + sensor_file[:13] + '_sensor_gpx.csv'
+interp_sensor_gpx_path = import_config["sens_gpx_path"] + sensor_file[:13] + '_interp_sensor_gpx.csv'
 
 
 
