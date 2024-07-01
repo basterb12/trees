@@ -8,9 +8,9 @@ class SensorFileParser:
         self.date_format = '%Y-%m-%d%H:%M:%S'
         self.cols_meteo = ['time', 'temperature', 'humidity', 'pressure', 'temperature2']
         self.cols_env = ['time', 'pm_1', 'pm_25', 'pm_10', 'pm_4']
-      #  self.cols_voc = ['time', 'voc']
+        #self.cols_voc = ['time', 'voc'] #edit
 
-    def parse_file(self, filepath, date) -> (pd.DataFrame, pd.DataFrame):
+    def parse_file(self, filepath, date) -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
         f = open(filepath)
         lines = f.readlines()
         if not lines:
@@ -19,7 +19,7 @@ class SensorFileParser:
         line_iter = iter(lines)  # here
         list_meteo = []
         list_env = []
-       # list_voc = []
+       # list_voc = [] #edit
         for ln in line_iter:
             ln = ln.strip()
             line_data = ln.split(",")
@@ -33,9 +33,9 @@ class SensorFileParser:
             if len(line_data) == 4 and line_data[3].startswith("Updated Value of Characteristic"):
                 char_line = line_data[3].split(" ")
                 if len(char_line) > 6:
-                  #  if len(char_line) == 8: #voc values
-                   #     voc = self.byteInt1(char_line[6][0:4])/1000
-                    #    list_voc.append([voc])
+                  #  if len(char_line) == 8: #voc values edit
+                   #     voc = self.byteInt1(char_line[6][0:4])/1000 #edit
+                    #    list_voc.append([voc]) #edit
                     if len(char_line) == 10:  #short data line (humidity,temp,pressure,temp precision)
                         temp = self.byteInt1(char_line[6][0:2])
                         hum = self.byteInt1(char_line[6][2:4])
@@ -51,10 +51,10 @@ class SensorFileParser:
 
         df_meteo = pd.DataFrame(list_meteo, columns=self.cols_meteo)
         df_env = pd.DataFrame(list_env, columns=self.cols_env)
-     #   df_voc = pd.DataFrame(list_voc, columns=self.cols_voc)
+      #  df_voc = pd.DataFrame(list_voc, columns=self.cols_voc) #edit
         
 
-        return df_meteo, df_env#, df_voc
+        return df_meteo, df_env#, df_voc #edit
 
     
   #this is method used - considers little-endian encoding

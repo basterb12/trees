@@ -23,8 +23,11 @@ def main(argv):
     results = file_parser.parse_file(file_name, sensor_file[0:10])
     meteo_df:pandas.DataFrame = results[0]
     env_df:pandas.DataFrame = results[1]
+   # voc_df:pandas.DataFrame = results[2] #edit
     meteo_df.to_csv(output_name[:-4]+'_meteo.csv', index=False)
     env_df.to_csv(output_name[:-4] + '_env.csv', index=False)
+   # voc_df.to_csv(output_name[:-4] + '_voc.csv', index=False) #edit
+    
 
 
 if __name__ == "__main__":
