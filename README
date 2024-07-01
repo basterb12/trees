@@ -12,11 +12,15 @@ On computer (macOS Sonoma 14.4.1; Python 3.11.5 using Jupyter Notebook 6.5.4 in 
 *LL is a 2 character site classifier
 Sites are: LL - Lewisham-Lewisham; NC - New Cross; A2 - Southwark Old Kent Road (A2); ST - Sydenham testing
 
-Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ , ‘sensor_file_parser.py’ , ‘comb_sens_gpx.py’.
+Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ , ‘sensor_file_parser.py’ , ‘sens.tree.comb.py’.
 
 (2) import.config.json : specify input and desired output file paths.
-(3) comb_sens_gpx.py : specify input sensor and gpx files (line 37-39).
+(3) sens.tree.comb.py : specify input sensor and gpx files (line 37-39).
 
-In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python comb_sens_gpx.py
+In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python sens.tree.comb.py
 .
-Outputs: ‘DATE_interp_sensor_gpx.csv’ and ‘DATE_sensor_gpx.csv’ created in specified output directory.
+Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree)
+created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics.
+
+
+Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. Scripts use Output (3) files. Still being worked on. 
