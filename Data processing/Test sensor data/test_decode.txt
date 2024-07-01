@@ -1,0 +1,5 @@
+11:49:14,Connected Device,normal,Updated Value of Characteristic DB450003-8E9A-4818-ADD7-6ED94A328AB4 to 2E11 DC8B 0100 C206.
+11:49:14,Connected Device,application,"2E11 DC8B 0100 C206" value received.
+11:49:14,Connected Device,normal,Updated Value of Characteristic DB450005-8E9A-4818-ADD7-6ED94A328AB4 to 8101 003A 0200 BD02 00BD 0100.
+11:49:14,Connected Device,application,"8101 003A 0200 BD02 00BD 0100" value received.
+11:49:16,Connected Device,normal,Updated Value of Characteristic DB450002-8E9A-4818-ADD7-6ED94A328AB4 to 2E00 0000.

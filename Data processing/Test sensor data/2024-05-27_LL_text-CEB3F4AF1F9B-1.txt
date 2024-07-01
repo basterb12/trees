@@ -120,7 +120,7 @@
 11:49:50,Connected Device,application,"2A11 F08B 0100 CC06" value received.
 11:49:50,Connected Device,normal,Updated Value of Characteristic DB450005-8E9A-4818-ADD7-6ED94A328AB4 to 6400 00E5 0000 4801 0064 0000.
 11:49:50,Connected Device,application,"6400 00E5 0000 4801 0064 0000" value received.
-11:49:52,Connected Device,normal,Updated Value of Characteristic DB450002-8E9A-4818-ADD7-6ED94A328AB4 to 0E00 0000.
+11:49:52,Connected Device,normal,Updated Value of Characteristic DB450002-8E9A-4818-ADD7-6ED94A328AB4 to DB450002-8E9A-4818-ADD7-6ED94A328AB4 0000.
 11:49:52,Connected Device,application,"0E00 0000" value received.
 11:49:52,Connected Device,normal,Updated Value of Characteristic DB450003-8E9A-4818-ADD7-6ED94A328AB4 to 2A11 E68B 0100 CC06.
 11:49:52,Connected Device,application,"2A11 E68B 0100 CC06" value received.
