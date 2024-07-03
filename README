@@ -23,4 +23,5 @@ Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location),
 created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics.
 
 
-Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. Scripts use Output (3) files. Still being worked on. 
+Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. T-test using R for adjacent tree, non-tree air quality relationships in same folder.
+Scripts use Output (3) files. Still being worked on. 
