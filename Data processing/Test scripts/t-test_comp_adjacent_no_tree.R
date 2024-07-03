@@ -128,10 +128,10 @@ print(t_test_result_next)
 ggplot(comparison_data, aes(x = group_id)) +
   geom_point(aes(y = avg_pm_10_tree), color = "blue", size = 3, alpha = 0.6) +
   geom_point(aes(y = avg_pm_10_prev_no_tree), color = "red", size = 3, alpha = 0.6) +
-  geom_point(aes(y = avg_pm_10_next_no_tree), color = "orange", size = 3, alpha = 0.6) +
+  geom_point(aes(y = avg_pm_10_next_no_tree), color = "red", size = 3, alpha = 0.6) +
   geom_line(aes(y = avg_pm_10_tree), color = "blue", linetype = "dashed") +
   geom_line(aes(y = avg_pm_10_prev_no_tree), color = "red", linetype = "dashed") +
-  geom_line(aes(y = avg_pm_10_next_no_tree), color = "orange", linetype = "dashed") +
+  geom_line(aes(y = avg_pm_10_next_no_tree), color = "red", linetype = "dashed") +
   theme_minimal() +
   labs(title = "Comparison of PM10 Levels Between Tree and Nearest No-Tree Segments",
        x = "Group ID",
@@ -139,3 +139,6 @@ ggplot(comparison_data, aes(x = group_id)) +
   scale_x_continuous(breaks = comparison_data$group_id) +
   scale_y_continuous(limits = c(min(comparison_data$avg_pm_10_tree, comparison_data$avg_pm_10_prev_no_tree, comparison_data$avg_pm_10_next_no_tree, na.rm = TRUE),
                                 max(comparison_data$avg_pm_10_tree, comparison_data$avg_pm_10_prev_no_tree, comparison_data$avg_pm_10_next_no_tree, na.rm = TRUE)))
+
+
+
