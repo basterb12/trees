@@ -32,7 +32,7 @@ from datetime import datetime, timedelta
 
 
 # Variables - set d to find trees and distances within a certain radius of each air measurement - default is set to 20 metres
-d = 50
+d = 10
 
 #input files - need to be specified before run
 sensor_file = '2024-06-28_CM.txt'
@@ -286,13 +286,104 @@ sens_gpx_tree = pd.merge(df_sens_gpx, df_air_tree, how='left', left_on='Index', 
 sens_gpx_tree = sens_gpx_tree.drop('Index', axis=1) #clean-up
 
 
-sens_gpx_tree.to_csv(sens_gpx_tree_output) #export as csv
+# In[18]:
+
+
+#print(sens_gpx_tree)
+unique_tree_names = sens_gpx_tree['tree_name'].unique()
+
+# Define the mapping dictionary
+tree_name_mapping = {
+    'Common Whitebeam': 'Whitebeam',
+    'Common Whitebeam ': 'Whitebeam',
+    'Swedish Whitebeam ': 'Whitebeam',
+    'Common Hornbeam': 'Hornbeam',
+    'London Plane': 'Plane',
+    'False-acacia': 'False Acacia',
+    'Sycamore Maple': 'Sycamore',
+    'Snake-Bark Maple': 'Maple',
+    'Ashleaf Maple': 'Maple',
+    'Silver Maple': 'Maple',
+    'Variegated Norway Maple': 'Norway Maple',
+    'Purple Norway Maple': 'Norway Maple',
+    'Ash': 'Common Ash',
+    'Snowy Mespilus': 'Mespilus',
+    'Cardinal Royal Rowan ': 'Rowan',
+    'Upright Rowan': 'Rowan',
+    'Chonosuki Crab': 'Crab Apple',
+    'Flowering Crab Apple Rudolph': 'Crab Apple',
+    'Ash ': 'Ash',
+    'Mountain Ash': 'Ash',
+    'Mountain Ash ': 'Ash',
+    'Raywood Ash': 'Ash',
+    'Raywood Ash ': 'Ash',
+    'Common Ash ': 'Ash',
+    'Common Ash': 'Ash',
+    'Manna Ash': 'Ash',
+    'Weeping Ash ': 'Ash',
+    'Upright Sargent’s Cherry ': 'Cherry',
+    "Cherry 'Pandora'": 'Cherry',
+    'Hillieri Spire Cherry': 'Cherry',
+    "Rosebud Cherry 'Autumnalis'": 'Cherry',
+    'Sweet Cherry': 'Cherry',
+    'Tibetan Cherry': 'Cherry',
+    'Pink Flowering Cherry': 'Cherry',
+    'Cherry ': 'Cherry',
+    'Japanese Cherry': 'Cherry',
+    "Cherry 'Kanzan'": 'Cherry',
+    'Flowering Cherry': 'Cherry',
+    'Spring Cherry': 'Cherry',
+    "Inermis' Black Locust": 'Black Locust',
+    'West Himalayan Birch': 'Birch',
+    'Moor Birch': 'Birch',
+    "Jacquemont's Birch": 'Birch',
+    ' Silver Birch ': 'Birch',
+    'Silver Birch': 'Birch',
+    'Downy Birch': 'Birch',
+    'Paper Birch': 'Birch',
+    '‘Edinburgh’ Birch': 'Birch',
+    'Common Hawthorn ': 'Hawthorn',
+    'Bastard Service Tree ': 'Service Tree',
+    'Box Elder': 'Elder',
+    'Common Alder': 'Alder',
+    'Grey Alder': 'Alder',
+    'Red Alder': 'Alder',
+    'Common Lime ': 'Lime',
+    'Lime Tree': 'Lime',
+    'Red Horse-Chestnut': 'Horse-Chestnut',
+    'Purple Leaved Plum': 'Plum',
+    'Portugal Laurel': 'Laurel',
+    'English Yew': 'Yew',
+    'Common Lilac': 'Lilac',
+    'Common Beech': 'Beech',
+    'Purple Beech': 'Beech',
+    'Variegated Holly': 'Holly',
+    'Common Holly':'Holly',
+    'Turkey Oak ': 'Oak',
+    'Holly Oak ': 'Oak',
+    'English Oak': 'Oak',
+    'Black Walnut ': 'Walnut',
+    'Hybrid Crack-willow': 'Willow',
+    'Giant Fir': 'Fir',
+    'Pyrus Species': 'Plum',
+    'Wild Plum': 'Plum',
+    'Cherry Plum': 'Plum',
+    'Linden': 'Lime',
+    'A Flowering Plant': 'Shadbush'
+    
+}
+
+# Apply the mapping to the 'tree_name' column
+sens_gpx_tree['tree_name'] = sens_gpx_tree['tree_name'].replace(tree_name_mapping)
+
+#unique_tree_names = sens_gpx_tree['tree_name'].unique()
+#print(unique_tree_names)
 
 
 # In[ ]:
 
 
-
+sens_gpx_tree.to_csv(sens_gpx_tree_output) #export as csv
 
 
 # In[ ]:
