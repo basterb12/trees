@@ -22,6 +22,5 @@ In console: (1) navigate to directory containing scripts - (2) python import_dat
 Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree)
 created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics.
 
-
-Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. T-test using R for adjacent tree, non-tree air quality relationships in same folder.
-Scripts use Output (3) files. Still being worked on. 
+T-test using R for adjacent tree, non-tree air quality relationships in 'Data processing' folder as 't_test_by_species.R'
+Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. Still being worked on.
