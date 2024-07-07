@@ -9,7 +9,7 @@
 
   "tseries_connection": {
     "host": "localhost",
-    "port": "5432",
+    "port": "5439",
     "database": "airquality_db",
     "user": "postgres",
     "password": "postgres"
