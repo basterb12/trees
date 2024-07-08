@@ -32,7 +32,7 @@ Test R Scripts for data analysis using a GAM in mgcv are located in 'Test script
 ## 2. Database
 
 ### Installation
-Using docker: Install docker dektop with docker compose (on Mac) or docker-ce on Linux.
+Using docker: Install docker dektop with docker compose (on Mac) https://docs.docker.com/desktop/install/mac-install/ or docker-ce on Linux.
 In order to work with the database there are apps which can be installed: https://postgresapp.com/documentation/gui-tools.html.
 
 ### Build container and database
