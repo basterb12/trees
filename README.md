@@ -43,7 +43,7 @@ docker build . -t dbtrees:latest
 ````
 ### Configure and start container
 
-The container configuration is defines in a docker compose file. 
+The container configuration is defined in a docker compose file. 
 
 ````yaml
 version: "2"
@@ -62,7 +62,7 @@ services:
     volumes:
       - /Users/sebastianherbst/data/dbtrees:/var/lib/postgresql/data
 ````
-If a volume is specified, it must be cerated on the host and must be empty.
+If a volume is specified, it must be created on the host and must be empty.
 The container can be started with:
 ```bash
 docker compose -p airquality up -d
