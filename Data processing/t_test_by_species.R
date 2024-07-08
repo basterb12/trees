@@ -14,38 +14,45 @@ library(readr)
 library(ggplot2)
 library(tidyr)
 library(stringr)
+library(rjson)
+library(DBI)
 
-# # Possible connection to postgres database
-# db_host <- "your_database_host"
-# db_port <- "your_database_port"
-# db_name <- "your_database_name"
-# db_user <- "your_database_username"
-# db_password <- "your_database_password"
-# 
-# #Connect
-# con <- dbConnect(
-#   RPostgres::Postgres(),
-#   host = db_host,
-#   port = db_port,
-#   dbname = db_name,
-#   user = db_user,
-#   password = db_password
-# )
-# 
-# # Retrieve data
-# query <- "SELECT * FROM your_table_name"
-# data <- dbGetQuery(con, query)
-# 
+# Possible connection to postgres database
+config <- fromJSON(file="import.config.json")
+print(config)
+print (config['database'][[1]])
+#Connect
+
+db_host <- config['host'][[1]]
+db_port <- config['port'][[1]]
+db_name <- config['database'][[1]]
+db_user <- config['user'][[1]]
+db_password <- config['password'][[1]]
+print(db_name)
+
+con <- dbConnect(
+  RPostgres::Postgres(),
+  host = db_host,
+  port = db_port,
+  dbname = db_name,
+  user = db_user,
+  password = db_password
+)
+
+# Retrieve data
+query <- "SELECT * FROM sensor.dist_5"
+data <- dbGetQuery(con, query)
+
 # dbDisconnect(con)
 
 
 
 # Load data
-path_name <- "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - all_air_location_tree/2024-06-28_CM_5m_all_air_tree_data.csv"
-data <- read_csv(path_name)
+#path_name <- "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - all_air_location_tree/2024-06-28_CM_5m_all_air_tree_data.csv"
+#data <- read_csv(path_name)
 
 # Extract 'd' from path_name
-d <- str_extract(path_name, "\\d+m")
+d <- 5#str_extract(path_name, "\\d+m")
 
 # Prepare data and prepare for t-tests - create segments
 

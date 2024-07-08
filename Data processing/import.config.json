@@ -4,14 +4,14 @@
     "cache_path": "/Users/sebastianherbst/Dissertation/Data processing/Cache_sens_decoding/",
     "sens_gpx_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - air_location/",
     "air_tree_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - air_tree_distance/",
-    "sens_gpx_tree_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - all_air_location_tree/",
+    "sens_gpx_tree_path": "./Output/Output - all_air_location_tree/",
+    "gis_path": "./Output/Gis/",
 
 
-  "tseries_connection": {
     "host": "localhost",
-    "port": "5432",
+    "port": "5439",
     "database": "airquality_db",
     "user": "postgres",
     "password": "postgres"
-  }
+
 }

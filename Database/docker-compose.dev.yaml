@@ -1,0 +1,16 @@
+version: "2"
+services:
+  trees-db:
+    image: dbtrees:latest
+    shm_size: 1g
+    ports:
+      - 5439:5432
+    environment:
+      ALLOW_IP_RANGE: 0.0.0.0/0
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: airquality_db
+      POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
+    volumes:
+      - /Users/sebastianherbst/data/dbtrees:/var/lib/postgresql/data
+
