@@ -1,10 +1,10 @@
 version: "2"
 services:
-  geodb14:
+   trees-db:
     image: dbtrees:latest
     shm_size: 1g
     ports:
-      - 5439:5432
+      - 55439:5432
     environment:
       ALLOW_IP_RANGE: 0.0.0.0/0
       POSTGRES_PASSWORD: postgres
@@ -12,5 +12,5 @@ services:
       POSTGRES_DB: airquality_db
       POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
     volumes:
-      - /Users/volkmarherbst/Documents/Docker/data/14:/var/lib/postgresql/data
+      - /Users/volkmarherbst/Documents/Docker/data/dbtrees1:/var/lib/postgresql/data
 
