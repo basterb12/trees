@@ -32,12 +32,13 @@ engine = create_engine(f'postgresql://{import_config["user"]}:{import_config["pa
 
 # Define the file paths for your CSV files
 for path in Path(import_config["sens_gpx_tree_path"]).resolve().iterdir():
-    location = path.name[11:13]
-    dist = re.search(r'\d+', path.name[14:16]).group()
-    print(f'Import: {path.name} -> {path.name.rfind("_")} {location} {dist} m')
-    df = pd.read_csv(path)
-    fname  = path.name.rstrip(".csv")
     try:
+        location = path.name[11:13]
+        dist = re.search(r'\d+', path.name[14:16]).group()
+        print(f'Import: {path.name} -> {path.name.rfind("_")} {location} {dist} m')
+        df = pd.read_csv(path)
+        fname  = path.name.rstrip(".csv")
+
         df.to_sql(fname, engine, if_exists='replace', index=False, schema='import')
         cur.execute(f'insert into sensor.dist_{dist} ("time", location, pm_1, pm_25, pm_10, pm_4, temperature, '
                     f'humidity, pressure, temperature2, sensor_geom, elevation, dist_to_closest_tree, air_measurement, '

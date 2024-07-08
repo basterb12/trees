@@ -22,7 +22,9 @@ for DB in template_postgis "$POSTGRES_DB"; do
 		CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
 EOSQL
+done
 
+echo "create tables for" "$POSTGRES_DB"
 #cretae tables for airquality_db database
 "${psql[@]}" --dbname="$POSTGRES_DB" <<-'EOSQL'
 create schema sensor;
@@ -169,7 +171,7 @@ alter table sensor.dist_10
     owner to postgres;
 
 create index sensor_loc10index
-    on sensor.ist_10 using gist (sensor_geom);
+    on sensor.dist_10 using gist (sensor_geom);
 
 create index tree_loc10_index
     on sensor.dist_10 using gist (tree_geom);
@@ -329,4 +331,4 @@ create index idx_loc100
 
 
 EOSQL
-done
+
