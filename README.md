@@ -9,8 +9,8 @@ Atmotube Pro: (1) Start Atmotube Pro (40min warmup) - (2) disconnect from Atmotu
 Trip Logger Remote (by Frank Dean) - (1) Settings-Local logging-period:1sec, distance:none, enabled; Accuracy:best, minimumHDOP:5metres, seektime:none, max activity history:1,000(max) - (2) Start - (3) Stop - (4) Tracks-select-share.
 
 
-### On computer (macOS Sonoma 14.4.1: 
-Python 3.11.5 using Jupyter Notebook 6.5.4 in Anaconda 2.6.0):
+### On computer 
+(macOS Sonoma 14.4.1: Python 3.11.5 using Jupyter Notebook 6.5.4 in Anaconda 2.6.0):
 
 (1) Rename input file from sensor data adding 'YYYY-MM-DD_LL_'* to 'OG-FILENAME.txt'.
 *LL is a 2 character site classifier
