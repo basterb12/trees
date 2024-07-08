@@ -33,13 +33,19 @@ RUN apt-get update \
       postgresql-server-dev-$PG_MAJOR \
       postgresql-$PG_MAJOR-pldebugger \
       protobuf-c-compiler \
-      xsltproc 
+      xsltproc
 
 RUN apt-get install -y r-base-dev
 COPY atopkrige_0.4.tar.gz /tmp/atopkrige_0.4.tar.gz
 RUN  R -e 'install.packages("sp",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
      && R -e 'install.packages("gstat",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
      && R -e 'install.packages("rgdal",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("dplyr",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("readr",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("ggplot2",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("tidyr",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("stringr",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
+     && R -e 'install.packages("rjson",dependencies = TRUE,repos="https://cran.uni-muenster.de/")' \
      && R -e 'install.packages("/tmp/atopkrige_0.4.tar.gz", dependencies = TRUE, type="source")' \
     &&  git clone https://github.com/postgres-plr/plr \
     && cd plr \

@@ -9,8 +9,8 @@ services:
       ALLOW_IP_RANGE: 0.0.0.0/0
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: airquality-db
+      POSTGRES_DB: airquality_db
       POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
     volumes:
-      - /Users/volkmarherbst/Documents/Docker/data/dbtrees:/var/lib/postgresql/data
+      - /Users/sebastianherbst/data/dbtrees:/var/lib/postgresql/data
 
