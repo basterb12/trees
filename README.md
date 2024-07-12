@@ -66,6 +66,10 @@ If a volume is specified, it must be created on the host and must be empty.
 The container can be started with:
 ```bash
 docker compose -p airquality up -d
+
+
+docker exec -it airquality-geodb14-1 psql -U postgres -d airquality_db
+
 ```
 From the host the database can be reached by host=loaclahost and port=5439.
 
