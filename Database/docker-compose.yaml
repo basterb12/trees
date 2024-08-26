@@ -12,4 +12,4 @@ services:
       POSTGRES_DB: airquality_db
       POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
     volumes:
-      - /Users/sebastianherbst/GitHub/trees/Database/Volumes:/var/lib/postgresql/data
+      - #specify your Volumes folder here
