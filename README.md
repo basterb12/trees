@@ -24,7 +24,7 @@ Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ ,
 In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python sens.tree.comb.py
 .
 Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree)
-created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics. Only output (3) is used in analysis. Other files (1 and 2) are created for possible data inspection.
+created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics. Only output (3) is used in analysis. Other files (1 and 2) are created for possible data inspection. Files are created that match trees and air measurements. Separate files are created for matches within 5, 10, 15, 20, and 50 metres.
 
 
 ## 2. Database
@@ -41,9 +41,11 @@ docker build . -t dbtrees:latest
 ````
 ### Configure and start container
 
-The container configuration is defined in a docker compose file. Example setup files are given in Database folder in repository.
+The container configuration is defined in a docker-compose.yaml file. Example setup files are given in Database folder in repository including the data structure in 'initdb-postgis.sh' and packages and updates in the 'Dockerfile'.
 
 If a volume is specified in the docker compose file, it must be created on the host and must be empty.
+Change the maintainer in the 'Dockerfile' to set up the database. 
+
 The container can be started with:
 ```bash
 docker compose -p airquality up -d
