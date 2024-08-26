@@ -24,10 +24,8 @@ Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ ,
 In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python sens.tree.comb.py
 .
 Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree)
-created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics.
+created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics. Only output (3) is used in analysis. Other files (1 and 2) are created for possible data inspection.
 
-T-test using R for adjacent tree, non-tree air quality relationships in 'Data processing' folder as 't_test_by_species.R'
-Test R Scripts for data analysis using a GAM in mgcv are located in 'Test scripts' folder. Still being worked on.
 
 ## 2. Database
 
@@ -43,35 +41,29 @@ docker build . -t dbtrees:latest
 ````
 ### Configure and start container
 
-The container configuration is defined in a docker compose file. 
+The container configuration is defined in a docker compose file. Example setup files are given in Database folder in repository.
 
-````yaml
-version: "2"
-services:
-  geodb14:
-    image: dbtrees:latest
-    shm_size: 1g
-    ports:
-      - 5439:5432
-    environment:
-      ALLOW_IP_RANGE: 0.0.0.0/0
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: airquality_db
-      POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
-    volumes:
-      - /Users/sebastianherbst/data/dbtrees:/var/lib/postgresql/data
-````
-If a volume is specified, it must be created on the host and must be empty.
+If a volume is specified in the docker compose file, it must be created on the host and must be empty.
 The container can be started with:
 ```bash
 docker compose -p airquality up -d
-
 
 docker exec -it airquality-geodb14-1 psql -U postgres -d airquality_db
 
 ```
 From the host the database can be reached by host=loaclahost and port=5439.
+
+
+### Load data into the database
+Run 'load_data.py' script from console. Can be found in 'Data processing' folder on repository. This adds any files from Output/Output - air_tree_distance folder into database (Output (3) from Data processing).
+
+### Run analysis
+Analysis scripts can be found in repository folder 'Data analysis'. Warning: To perform the data analysis for separate sites, times, or to select values from parks/street areas the query function might have to be adjusted within the analysis scripts.
+
+(1) To perform paired t-test of segments near trees and the next closest non-tree segments run 't-test_tree_no_tree.R'.
+(2) To perform comparison of temperature and PM measurements in parks and outside of parks run 'park_no_park.R'.
+(3) For additional visualisations run 'visualisation.R'.
+
 
 
 
