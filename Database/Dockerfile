@@ -1,6 +1,6 @@
 FROM ghcr.io/gui/postgis:15-postgis-3  as builder
 
-LABEL maintainer="Volkmar Herbst <volkmar.herbst@gmx.de>"
+LABEL maintainer= #specify your database maintainer here
 ENV PG_MAJOR 15
 
 WORKDIR /
