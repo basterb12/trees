@@ -7,7 +7,7 @@
 #IMPORTANT: SPECIFY INPUT FILES (LINE 36-37); CHANGE DISTANCE TO CLOSEST TREE (LINE 33)
 
 #Script takes csv outputs created by "import_data.py" for "Atmotube Pro" data intercepted by "nRF Connect"
-#bluetooth API. This data was decoded with "sensor_file_parser.py".
+#bluetooth API. This data was decoded with "sensor_file_parser.py" in "import_data.py".
 #Then reads gpx data from "TripLogger" mobile app and creates combined pandas dataframe for all sensor and gpx data.
 
 #Long/lat/elevation data is not available for all "time" values, missing data provided using linear 
@@ -31,14 +31,14 @@ from datetime import datetime, timedelta
 # In[3]:
 
 
-# Variables - set d to find trees and distances within a certain radius of each air measurement - default is set to 20 metres
+# Variables - set d to find trees and distances within a certain radius of each air measurement
 d = 5
 
 #input files - need to be specified before run
-sensor_file = '2024-07-19_A2.txt'
-gpx_file = '2024-07-19_A2.gpx'
+sensor_file = #'specified file' e.g.: 2024-07-19_A2.txt
+gpx_file = #'specified file' e.g.: 2024-07-19_A2.gpx
 
-tree_data_path = '/Users/sebastianherbst/Dissertation/Data processing/Tree data/A2_trees.csv'
+tree_data_path = #'specify data path' This should be the file where you have stored tree data - should match format of GLA London tree database - can find online
 tree_data = open(tree_data_path)
 df_tree_data = pd.read_csv(tree_data)
 
@@ -105,7 +105,7 @@ df_gpx['time'] = df_gpx['time'] + timedelta(hours=1)
 #add dataframes from sensor and gpx into one file - match the time-steps    
 df_sens_gpx = pd.merge_ordered(df_sens_comb, df_gpx, fill_method="ffill", left_by='time')
 
-#df_sens_gpx.to_csv(sensor_gpx_path) #creates csv with only measured points (no interpolation)
+
 
 
 #interpolate missing lon/lat/elevation data in gpx files
@@ -156,9 +156,7 @@ min_lon = df_sens_gpx['longitude'].min() - 0.0015
 # In[10]:
 
 
-#Corners of the sample plot = 51.466749,-0.019651; =51.456990,-0.005037
-
-#restrict trees imported to those within a quadrant matching the LL sampling area
+#restrict trees imported to those within a quadrant matching the sampling area
 df_trees = df_tree_data[(df_tree_data['lat'] >= min_lat) & (df_tree_data['lat'] <= max_lat)]
 df_trees = df_trees[(df_trees['lon'] >= min_lon) & (df_trees['lon'] <= max_lon)]
 
@@ -208,9 +206,7 @@ df_sens_gpx = pd.merge(df_sens_gpx, df_min_dist, left_on='Index', right_index=Tr
 # In[13]:
 
 
-#Corners of the sample plot = 51.466749,-0.019651; =51.456990,-0.005037
-
-#restrict trees imported to those within a quadrant matching the LL sampling area
+#restrict trees imported to those within a quadrant matching the sampling area
 df_trees = df_tree_data[(df_tree_data['lat'] >= min_lat) & (df_tree_data['lat'] <= max_lat)]
 df_trees = df_trees[(df_trees['lon'] >= min_lon) & (df_trees['lon'] <= max_lon)]
 
