@@ -6,14 +6,14 @@ set -e
 export PGUSER="$POSTGRES_USER"
 
 # Create the 'template_postgis' template db
-"${psql[@]}" <<- 'EOSQL'
+psql <<- 'EOSQL'
 CREATE DATABASE template_postgis IS_TEMPLATE true;
 EOSQL
 
 # Load PostGIS into both template_database and $POSTGRES_DB
 for DB in template_postgis "$POSTGRES_DB"; do
 	echo "Loading PostGIS extensions into $DB"
-	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
+	psql --dbname="$DB" <<-'EOSQL'
 		CREATE EXTENSION IF NOT EXISTS postgis;
 		CREATE EXTENSION IF NOT EXISTS postgis_topology;
 		-- Reconnect to update pg_setting.resetval
@@ -26,7 +26,7 @@ done
 
 echo "create tables for" "$POSTGRES_DB"
 #cretae tables for airquality_db database
-"${psql[@]}" --dbname="$POSTGRES_DB" <<-'EOSQL'
+psql --dbname="$POSTGRES_DB" <<-'EOSQL'
 create schema sensor;
 create schema import;
 create table sensor.dist_5
