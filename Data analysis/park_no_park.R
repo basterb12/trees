@@ -1,4 +1,6 @@
-# Load necessary libraries
+#This script creates two sets of data (park and no park) by using spatial envelopes in the database query. 
+#Kolmogorov-Smirnoff test is performed to check for normality - if not normal Mann-Whitney U-test is performed, if normal then paired t-test.
+
 library(dplyr)
 library(readr)
 library(mgcv)
@@ -8,8 +10,8 @@ library(RPostgres)
 library(rjson)
 library(patchwork)
 
-# Connection to PostgreSQL database
-config <- fromJSON(file="/Users/sebastianherbst/Dissertation/Data processing/import.config.json")
+# Connection to PostgreSQL database - specify where your json file is saved
+config <- fromJSON(file=#"SPECIFY/import.config.json")
 print(config)
 print(config['database'][[1]])
 
@@ -23,9 +25,10 @@ con <- dbConnect(
   password = "postgres"
 )
 
-plot_file <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/Park - no park/2024-05-27_LL.png"
+plot_file <- #"FILE WHERE YOU WANT YOUR PLOT TO BE SAVED"
   
-# Retrieve data
+# Retrieve data - Use query functions to specify what measurements you want to compare - here it is site LL from Date 2024-06-17
+# The envelope here means data selected is NOT from within the parks
 query <- "SELECT * FROM sensor.dist_20
 WHERE location = 'LL'
 AND DATE(time) = '2024-06-17'
@@ -43,15 +46,9 @@ AND NOT(
     ST_MakeEnvelope(-0.0588, 51.4774, -0.0546, 51.4787, 4326)
   )
 )
-AND pm_1 < 20
-AND pm_25 < 20
-AND pm_4 < 20
-AND pm_10 < 30;"
+;"
 
-# AND NOT location = 'CM'
-# AND NOT location = 'ST';"
-#AND DATE(time) = '2024-05-27'
-
+#This query selects the data from the park - makes sure its the same period and site to be able to compare
 query_park <- "
 SELECT * 
 FROM sensor.dist_20
@@ -71,12 +68,10 @@ AND (
     ST_MakeEnvelope(-0.0588, 51.4774, -0.0546, 51.4787, 4326)
   )
 )
-AND pm_1 < 20
-AND pm_25 < 20
-AND pm_4 < 20
-AND pm_10 < 30
+
 ;"
-#AND DATE(time) = '2024-07-19'
+
+
 data <- dbGetQuery(con, query)
 data_park <- dbGetQuery(con, query_park)
 
@@ -89,7 +84,7 @@ pollutant_names <- c(
   "temperature2" = "Temperature"
 )
 
-# Function to perform statistical tests, including a permutation test
+# Function to perform statistical tests
 perform_stat_tests <- function(data1, data2, pollutant, num_permutations = 2000) {
   data_combined <- data1 %>%
     mutate(location = "General Area") %>%
@@ -116,7 +111,7 @@ perform_stat_tests <- function(data1, data2, pollutant, num_permutations = 2000)
                                       data_combined %>% filter(location == "Park Area") %>% pull(!!sym(pollutant)), 
                                       paired = FALSE, alternative = "two.sided")
     stat_test_results <- list(wilcox_test = wilcox_test_result)
-    # Print Wilcoxon test results
+    # Print test results
     cat(paste("Mann-Whitney U test result for", pollutant, ":\n"))
     print(wilcox_test_result)
   } else {
@@ -124,8 +119,7 @@ perform_stat_tests <- function(data1, data2, pollutant, num_permutations = 2000)
                             data_combined %>% filter(location == "Park Area") %>% pull(!!sym(pollutant)), 
                             paired = FALSE, alternative = "two.sided")
     stat_test_results <- list(t_test = t_test_result)
-    # Print t-test results
-    cat(paste("Independent t-test result for", pollutant, ":\n"))
+    cat(paste("T-test result for", pollutant, ":\n"))
     print(t_test_result)
   }
   
@@ -216,7 +210,7 @@ ggsave(plot_file, plot = combined_plot, height = 4.5, width =10)
 
 
 # Create a directory to save the results if it doesn't exist
-output_dir <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_park_results"
+output_dir <- #"YOUR DIRECTORY/park_no_park_results/"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
@@ -229,11 +223,11 @@ for (pollutant in names(analysis_results)) {
   summary_stats <- analysis_results[[pollutant]]$summary_stats
   stat_test_results <- analysis_results[[pollutant]]$stat_test_results
   
-  # Save summary_stats to CSV
+  # Save summary_stats as csv
   summary_stats_file <- file.path(output_dir, paste0("summary_stats_", pollutant, ".csv"))
   write.csv(summary_stats, summary_stats_file, row.names = FALSE)
   
-  # Save stat_test_results to CSV
+  # Save stat_test_results to csv
   if (!is.null(stat_test_results$t_test)) {
     stat_test_result_file <- file.path(output_dir, paste0("t_test_results_", pollutant, ".csv"))
     t_test_results_df <- data.frame(
