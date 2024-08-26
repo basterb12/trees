@@ -61,9 +61,9 @@ Run 'load_data.py' script from console. Can be found in 'Data processing' folder
 Analysis scripts can be found in repository folder 'Data analysis'. Warning: To perform the data analysis for separate sites, times, or to select values from parks/street areas the query function might have to be adjusted within the analysis scripts.
 
 (1) To perform paired t-test of segments near trees and the next closest non-tree segments run 't-test_tree_no_tree.R'.
+
 (2) To perform comparison of temperature and PM measurements in parks and outside of parks run 'park_no_park.R'.
+
 (3) For additional visualisations run 'visualisation.R'.
-
-
 
 
