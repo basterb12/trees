@@ -1,11 +1,11 @@
 {
-  "data_path": " ",
-    "gpx_path": " ",
-    "cache_path": " ",
-    "sens_gpx_path": " ",
-    "air_tree_path": " ",
-    "sens_gpx_tree_path": " ",
-#specify paths above
+  "data_path": "/Users/sebastianherbst/Dissertation/Data processing/Test sensor data/",
+    "gpx_path": "/Users/sebastianherbst/Dissertation/Data processing/Test sensor data/Test gpx data/",
+    "cache_path": "/Users/sebastianherbst/Dissertation/Data processing/Cache_sens_decoding/",
+    "sens_gpx_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - air_location/",
+    "air_tree_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - air_tree_distance/",
+    "sens_gpx_tree_path": "/Users/sebastianherbst/Dissertation/Data processing/Output/Output - all_air_location_tree/",
+
 
   "tseries_connection": {
     "host": "localhost",
