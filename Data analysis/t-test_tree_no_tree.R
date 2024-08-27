@@ -4,10 +4,10 @@
 # and the closest (prev, next) non-tree segments for that species' segment.
 # Results show t-value and significance (p<0.05) for prev/next and combined (prev/next closest non-tree segment) separately.
 
-#~/Dissertation/Data processing/t_test_by_species.R
+#GAM is also run to see if there's any effect between dbh and difference between tree and closest non-tree segments.
+
 
 # File uses 'Output/Output- all_air_location_tree/' file created from comb.sens.tree.py 
-# Possible link to database commented out below
 
 # Load packages
 library(dplyr)
@@ -23,7 +23,7 @@ library(purrr)
 library(mgcv)
 
 #Connection to postgres database
-config <- fromJSON(file="/Users/sebastianherbst/Dissertation/Data processing/import.config.json")
+config <- fromJSON(file=#"DIRECTORY/import.config.json")
 print(config)
 print (config['database'][[1]])
 #Connect
@@ -44,10 +44,11 @@ con <- dbConnect(
   password = "postgres"
 )
 
+#specify your output files
 site <- "- All (street)"
-plot_file <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/t_test_plot_All_street.png"
-local_plot_file <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/local_t_test_All_street.png"
-csv_result_file <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/t-test_result.csv"
+plot_file <- "/t_test_plot_All_street.png"
+local_plot_file <- "/local_t_test_All_street.png"
+csv_result_file <- "/t-test_result.csv"
 
 # Retrieve data
 query <- "SELECT * FROM sensor.dist_10
@@ -66,21 +67,19 @@ AND NOT (
     ST_MakeEnvelope(-0.0588, 51.4774, -0.0546, 51.4787, 4326)
   )
 )"
-# AND NOT DATE(time) = '2024-05-27'"
-#WHERE location = 'LL' OR location = 'A2'
-#AND diameter_at_breast_height_cm > 30"
+
 
 data <- dbGetQuery(con, query)
-# 
+ 
 
-# Extract 'd' from path_name
+# Just for naming plots - not really necessary
 d <- "10m of trees"
 
 # Linear interpolation for missing temperature2 data
 data$temperature2 <- na.approx(data$temperature2, na.rm = FALSE)  # Fill missing data
 
-
-source("~/Dissertation/Data processing/process_data.R")
+#Run the script to clean the data
+source("~/process_data.R")
 
 # Group tree segments together
 data <- data %>%
@@ -271,9 +270,9 @@ comparison_data_all <- bind_rows(comparison_data_pm1, comparison_data_pm25, comp
 t_test_results_df <- all_results_df
 significant_t_test_results_df <- significant_results_df
 
-# Save the filtered DataFrame to a CSV file
+# Save the filtered DataFrame to a csv
 #write.csv(significant_combined_overall_df, "/Users/sebastianherbst/Dissertation/Data processing/significant_combined_overall_df.csv", row.names = FALSE)
-write.csv(overall_results_df, "/Users/sebastianherbst/Dissertation/Data processing/overall_tree_no_tree_result.csv", row.names = FALSE)
+write.csv(overall_results_df, "/overall_tree_no_tree_result.csv", row.names = FALSE)
 
 # Save comparison data to be able to check and see
 comparison_data_pm10 <- results_pm10$comparison_data
@@ -319,20 +318,6 @@ overall_averages_long <- overall_averages %>%
                                "avg_tree_overall" = "Tree Segment Average", 
                                "avg_no_tree_overall" = "Combined No-Tree Average"))
 
-# # Plot the overall averages
-# ggplot(overall_averages_long, aes(x = Pollutant, y = Average_Concentration, fill = Segment_Type)) +
-#   geom_bar(stat = "identity", position = position_dodge(width = 0.4), width = 0.3) +  # Adjust the bar width and spacing
-#   theme_minimal() +
-#   labs(title = paste("Overall Average Concentrations within", d),
-#        x = "Pollutant",
-#        y = "Average Concentration",
-#        fill = "Segment Type") +
-#   scale_fill_viridis(discrete = TRUE, option = "H") +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-#         legend.key.size = unit(0.4, "cm"),
-#         legend.text = element_text(size = 8),
-#         legend.title = element_text(size = 7),
-#         legend.position = "right")
 
 
 # Create a plot of the mean differences with error bars for confidence intervals
@@ -353,7 +338,7 @@ t_test_plot
 #ggsave(plot_file, plot = t_test_plot, width = 10, height = 3)
 
 
-
+#Run gams to see if there is any effect between difference in tree_no_tree and dbh
 #prep gam
 gam_pm1 <- gam(diff_tree_no_tree ~ s(avg_dbh_tree), method='REML', data = comparison_data_pm1)
 gam_pm25 <- gam(diff_tree_no_tree ~ s(avg_dbh_tree), method='REML', data = comparison_data_pm25)
