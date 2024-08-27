@@ -21,10 +21,13 @@ Requirements: requires scripts ‘import.config.json’ , ‘import_data.py’ ,
 (2) import.config.json : specify input and desired output file paths.
 (3) sens.tree.comb.py : specify input sensor and gpx files (line 37-39).
 
-In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python sens.tree.comb.py
-.
-Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree)
-created in specified output directory. Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics. Only output (3) is used in analysis. Other files (1 and 2) are created for possible data inspection. Files are created that match trees and air measurements. Separate files are created for matches within 5, 10, 15, 20, and 50 metres.
+In console: (1) navigate to directory containing scripts - (2) python import_data.py INPUT_FILENAME.TXT - (3) python sens.tree.comb.py.
+
+Outputs: (1) ‘DATE_interp_sensor_gpx.csv’ (in Output/Output - air_location), (2) 'DATE_air_tree_matched.csv' (in Output/Output - air_tree_distance), (3) 'DATE_[TREESINRADIUS]_all_air_tree_data.csv' (in Output/Output - all_air_location_tree) created in specified output directory. 
+
+Files contain (1) matched sensor and gpx data; (2) sens+gpx data mached with tree database; (3) sens+gpx+trees including distances to trees and tree characteristics. 
+
+Only output (3) is used in analysis. Other files (1 and 2) are created for possible data inspection. Files are created that match trees and air measurements. Separate files are created for matches within 5, 10, 15, 20, and 50 metres.
 
 
 ## 2. Database
@@ -62,7 +65,7 @@ Run 'load_data.py' script from console. Can be found in 'Data processing' folder
 ### Run analysis
 Analysis scripts can be found in repository folder 'Data analysis'. Warning: To perform the data analysis for separate sites, times, or to select values from parks/street areas the query function might have to be adjusted within the analysis scripts.
 
-(1) To perform paired t-test of segments near trees and the next closest non-tree segments run 't-test_tree_no_tree.R'.
+(1) To perform paired t-test of segments near trees and the next closest non-tree segments run 't-test_tree_no_tree.R'. This includes a gam for analysing tree dbh impact on difference in pollution and temperature near trees.
 
 (2) To perform comparison of temperature and PM measurements in parks and outside of parks run 'park_no_park.R'.
 
