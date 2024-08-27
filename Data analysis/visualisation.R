@@ -1,10 +1,14 @@
+#No analysis in this script, only visualisations. 
+#Input files arent necessarily already created in analysis scripts in the format they are used in here. 
+#Some input files were manually put together from analysis script results.
+
 library(dplyr)
 library(ggplot2)
 library(readr)
 
 # Load the CSV file
-file_path_park_no_park_pm <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_park_results/Park_v_stree_results_pm_cleaned.csv"
-file_path_park_no_park_temp <- "/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_park_results/Park_v_stree_results_temp_cleaned.csv"
+file_path_park_no_park_pm <- "/Park_v_stree_results_pm_cleaned.csv"
+file_path_park_no_park_temp <- "/Park_v_stree_results_temp_cleaned.csv"
 
 df_pm <- read_csv(file_path_park_no_park_pm, na = c("", "NA"))
 df_temp <- read_csv(file_path_park_no_park_temp, na = c("", "NA"))
@@ -60,7 +64,7 @@ local_t_test_plot <- ggplot(plot_pm_data, aes(x = Pollutant, y = mean_difference
 # Display the plot
 print(local_t_test_plot)
 #save
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_park_results/mean_diff_pm_park_no_park.png", plot = local_t_test_plot, width = 12, height = 6)
+ggsave("/Park_no_park_results/mean_diff_pm_park_no_park.png", plot = local_t_test_plot, width = 12, height = 6)
 
 
 
@@ -83,7 +87,7 @@ print(local_t_test_temp_plot)
 
 # # Save the plot
 # plot_file <- "/path/to/save/t_test_plot_all_sites.png"  # Update the path as necessary
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_park_results/mean_diff_temp_park_no_park.png", plot = local_t_test_temp_plot, width = 12, height = 5)
+ggsave("/Park_no_park_results/mean_diff_temp_park_no_park.png", plot = local_t_test_temp_plot, width = 12, height = 5)
 
 
 
@@ -100,7 +104,7 @@ ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/Park_no_pa
 
 
 # Load the csv file
-file_path <- "/Users/sebastianherbst/Dissertation/Data processing/Output/Tree_no_tree_t_test_results.csv"
+file_path <- "/Tree_no_tree_t_test_results.csv"
 overall_results_df <- read_csv(file_path)
 
 # Ensure that the column names are as expected
@@ -132,7 +136,7 @@ LL_plot <- ggplot(LL_data, aes(x = SITE, y = mean_difference, fill = p_value < 0
   facet_wrap(~ Pollutant, scales = "free_x", nrow = 1)
 
 LL_plot
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/LL_comp.png", plot = LL_plot, height = 3, width = 10)
+ggsave("/R_results/LL_comp.png", plot = LL_plot, height = 3, width = 10)
 
 
 
@@ -157,7 +161,7 @@ NC_plot <- ggplot(NC_data, aes(x = SITE, y = mean_difference, fill = p_value < 0
   facet_wrap(~ Pollutant, scales = "free_x", nrow = 1)
 
 NC_plot
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/NC_comp.png", plot = NC_plot, height = 3, width = 10)
+ggsave("/R_results/NC_comp.png", plot = NC_plot, height = 3, width = 10)
 
 
 A2_data <- overall_results_df %>%
@@ -181,7 +185,7 @@ A2_plot <- ggplot(A2_data, aes(x = SITE, y = mean_difference, fill = p_value < 0
   facet_wrap(~ Pollutant, scales = "free_x", nrow = 1)
 
 A2_plot
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/A2_comp.png", plot = A2_plot, height = 3, width = 10)
+ggsave("/R_results/A2_comp.png", plot = A2_plot, height = 3, width = 10)
 
 
 
@@ -206,7 +210,7 @@ All_comp_plot <- ggplot(All_comp_data, aes(x = SITE, y = mean_difference, fill =
   facet_wrap(~ Pollutant, scales = "free_x", nrow = 1)
 
 All_comp_plot
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/all_comp.png", plot = All_comp_plot, height = 3, width = 10)
+ggsave("/R_results/all_comp.png", plot = All_comp_plot, height = 3, width = 10)
 
 
 
@@ -231,4 +235,4 @@ All_plot <- ggplot(All_data, aes(x = Pollutant, y = mean_difference, fill = p_va
   facet_wrap(~ Pollutant, scales = "free_x", nrow = 1)
 
 All_plot
-ggsave("/Users/sebastianherbst/Dissertation/Data processing/R_results/All.png", plot = All_plot, height = 2.5, width = 10)
+ggsave("/R_results/All.png", plot = All_plot, height = 2.5, width = 10)
